@@ -8,15 +8,17 @@ let users = []
 
 
 document.addEventListener('DOMContentLoaded', function(){
-    
+    const urlParams = new URLSearchParams(window.location.search)
+    const recipeId = urlParams.get('id')
     if(window.location.href.includes('/allRecipes.html')){
         allRecipes()
         .then(()=>{
             return renderRecipes()
         })
     }
-    if(window.location.href.includes(`recipePage.html?id=${oneRecipe._id}`)){
-        recipeByID(oneRecipe._id)
+    if(window.location.href.includes(`recipePage.html?id=${recipeId}`)){
+        recipeByID(recipeId)
+        
         .then(()=>{
             renderSingle()
         })
