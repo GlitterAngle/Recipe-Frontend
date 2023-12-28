@@ -37,6 +37,39 @@ async function recipeByID(id){
     })
 }
 
+function renderSingle(){
+    oneRecipe.forEach((recipe)=>{
+        //find the section in the html made for this area
+        const singleRecipeContainer = document.querySelector('.recipe-container')
+
+        //create divs where the information will life
+        const recipeDiv = document.createElement('div')
+        const recipeImg = document.createElement('img')
+        const recipeTitle = document.createElement('h2')
+        const recipeUser = document.createElement('h3')
+        const recipeCreated = document.createElement('p')
+        const recipeIngredients = document.createElement('p')
+        const recipeDirections = document.createElement('p')
+        const recipeStory = document.createElement('p')
+
+        //give class names
+        recipeDiv.className = 'recipeDiv'
+        recipeImg.className = 'recipeImg'
+        recipeTitle.className = 'recipeTitle'
+        recipeUser.className = 'recipeUser'
+        recipeCreated.className = 'recipeCreated'
+        recipeIngredients.className = 'recipeIngredients'
+        recipeDirections.className = 'recipeDirections'
+        recipeStory.className = 'recipeStory'
+
+        //set id incase user is logged in and wants to edit page from here 
+        recipeDiv.setAttribute('data-id', recipe._id)
+
+        //fill text
+        
+
+    })
+}
 function renderRecipes(){
     recipes.forEach((recipe) => {
         const allRecipesContainer = document.querySelector('.allRecipes-container')
