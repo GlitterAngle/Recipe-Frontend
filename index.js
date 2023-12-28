@@ -3,15 +3,25 @@
 //get the user by id and their entrie recipe history
 
 let recipes = []
-let oneRecipe = []
+let oneRecipe = {}
 let users = []
 
 
 document.addEventListener('DOMContentLoaded', function(){
-    allRecipes()
-    .then(()=>{
-        return renderRecipes()
-    })
+    
+    if(window.location.href.includes('/allRecipes.html')){
+        allRecipes()
+        .then(()=>{
+            return renderRecipes()
+        })
+    }
+    if(window.location.href.includes(`recipePage.html?id=${oneRecipe._id}`)){
+        recipeByID(oneRecipe._id)
+        .then(()=>{
+            renderSingle()
+        })
+    }
+   
 })
 
 
@@ -25,12 +35,10 @@ async function allRecipes(){
 
 async function recipeByID(id){
     //not sure why i need to declare content type it kept returning javascript 
-    const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/${id}`,{
-        headers: {
-            'Content-Type': 'application/json'
-        }})
+    const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/${id}`)
     .then(response=>{
         oneRecipe = response.data.singleRecipe
+        console.log(oneRecipe)
     }).catch((error)=>{
         console.log(error)
     })
@@ -118,13 +126,8 @@ function renderRecipes(){
         allRecipesContainer.appendChild(recipeDiv)
 
         recipeTitle.addEventListener('click', function(e){
-            // e.preventDefault()
             const id = e.target.getAttribute('data-id')//grabs the id for the recipe you click on 
-            console.log('clicked recipe id:',id)
             recipeByID(id)
-            // .then(()=>{
-            //     renderSingle()
-            // })
         })
 
     });
