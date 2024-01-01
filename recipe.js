@@ -40,7 +40,7 @@ async function recipeByID(id){
     const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/${id}`)
     .then(response=>{
         oneRecipe = response.data.singleRecipe
-        console.log(oneRecipe)
+        console.log("fetched recipe:", oneRecipe)
     }).catch((error)=>{
         console.log(error)
     })
@@ -95,6 +95,7 @@ function renderSingle(){
             //append the div to the html page
             singleRecipeContainer.appendChild(recipeDiv)
         }
+        console.log("Rendering recipe:", oneRecipe)
 }
 
 
