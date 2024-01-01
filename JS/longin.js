@@ -2,6 +2,7 @@ const logingBtn = document.querySelector('.account')
 const joinBtn = document.querySelector('.join')
 
 
+
 logingBtn.addEventListener("click", function(){
     console.log(logingBtn,"clicked")
 })
