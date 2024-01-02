@@ -271,7 +271,7 @@ async function loginEvent(){
         if(checkForUser.data){
             
             const token = checkForUser.data
-            localStorage.setItem('userToken', token)
+            localStorage.setItem('token', token)
             console.log("after the checkforuser if statement",token)
             userInfo = checkForUser.data
             console.log('logged in user info:', userInfo)
@@ -316,7 +316,7 @@ async function loginEvent(){
 
         if(response.status === 200){
             
-            localStorage.setItem('jwtToken', response.data.token)
+            localStorage.setItem('token', response.data.token)
             console.log("after the response if statement",response.data.token)
 
             userInfo = response.data.allUsers
@@ -353,7 +353,7 @@ async function loginEvent(){
 
         if(response.status === 200){
             
-            localStorage.setItem('jwtToken', response.data.token)
+            localStorage.setItem('token', response.data.token)
             console.log("after the response if statement",response.data.token, response.data)
 
             userInfo = response.data.userProfile
