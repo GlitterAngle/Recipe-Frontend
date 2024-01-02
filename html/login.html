@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css">
     <script defer src="/JS/longin.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -14,10 +14,10 @@
         <a href="allRecipes.html" class="allRecipes">All Recipes</a>
     </nav>
     <div class="login">
-        <form id="username">
+        <form class="username">
             <text>
-                <input type="text" placeholder="Enter username" class="username"/>
-                <input type="password" placeholder="Enter password" class="password"/>
+                <input type="text" placeholder="Enter username" id="username"/>
+                <input type="password" placeholder="Enter password" id="password"/>
                 <button class="account">Login</button>
             </text>
         </form>

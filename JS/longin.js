@@ -1,27 +1,55 @@
 const logingBtn = document.querySelector('.account')
 const joinBtn = document.querySelector('.join')
 
+let userInfo = {}
 
+logingBtn.addEventListener("click", async function(e){
+    e.preventDefault()
+    const id = e.target.getAttribute('data-id')
+    await loginEvent(id)
+    .then(()=>{
 
-logingBtn.addEventListener("click", function(){
-    console.log(logingBtn,"clicked")
+    })
 })
 
 joinBtn.addEventListener("click", function(){
-    console.log(joinBtn, "clicked join")
     window.location.href = `signup.html`
 })
 
 async function loginEvent(){
-    const username = document.getElementById(".username")
-    const password = document.getAnimations(".password")
+    try {
+        const username = document.querySelector("#username").value
+        const password = document.querySelector("#password").value
 
-    const usernameInput = username.value
-    const passwordInput = password.value
+        // logingBtn.setAttribute('data-id', userInfo._id)
 
-    const checkForUser = await axios.post("https://heartfeltbites-3a2e21beb448.herokuapp.com/api/user/login",{username: usernameInput, password: passwordInput})
+        console.log("Attempting login with:", username, password)
 
-    .then(()=>{
-        return checkForUser
-    })
+        const response = await axios.post("https://heartfeltbites-3a2e21beb448.herokuapp.com/api/user/login",{username: username, password: password})
+
+        console.log("Server response:", response.data)
+        console.log("check for user status", response.status)
+
+        if(response.status === 200){
+            
+            localStorage.setItem('jwtToken', response.data.token)
+            console.log("after the response if statement",response.data.token, response.data)
+
+            userInfo = response.data.userProfile
+            console.log('logged in user info:', userInfo)
+            window.location.href =  `profile.html`
+            // ?id=${userInfo._id}
+            
+        } else{
+            const errorMessage = response.data.message || 'Login failed with no additional message'
+            console.log('Login failed:this is the error', errorMessage)
+            console.log("Else response:", response.data)
+            alert('Error:' + errorMessage)
+        }
+    } catch (error) {
+        console.error("Login error:", error)
+    }
+    
+
 }
+

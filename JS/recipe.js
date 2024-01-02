@@ -1,21 +1,24 @@
-//get all recipes only show title name
-//get recipe by id show the whole recipe
-//get the user by id and their entrie recipe history
+//global variables
 
 let recipes = []
 let oneRecipe = {}
-let users = []
 
 
+//add a listener that runs when the DOM content is fully loaded and depending on the current URL runs a particular code
 document.addEventListener('DOMContentLoaded', function(){
+    //parses the current URL to check if there is a recipe ID parameter
     const urlParams = new URLSearchParams(window.location.search)
     const recipeId = urlParams.get('id')
+
+    //checks if the current page is allRecipes.html if soe calls allrecipes function and renderRecipes
     if(window.location.href.includes('/allRecipes.html')){
         allRecipes()
         .then(()=>{
             return renderRecipes()
         })
     }
+
+    //checks if the current page is recipePage.html with a specific recipe id and if so calls the recipeById function and then the renderSingle 
     if(window.location.href.includes(`recipePage.html?id=${recipeId}`)){
         recipeByID(recipeId)
         
@@ -27,26 +30,31 @@ document.addEventListener('DOMContentLoaded', function(){
 })
 
 
+//makes an async GET request to API endpont to fetch all recipes
 async function allRecipes(){
     const response = await axios.get("https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes")
     .then(response=>{
+
+        //stores the fetched data in an array
         recipes = response.data.allRecipes
     })
     
 }
 
+//needs a recipe ID as a parameter with an async get with the ID as a parameter
 async function recipeByID(id){
-    //not sure why i need to declare content type it kept returning javascript 
     const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/${id}`)
     .then(response=>{
+
+        //stores the fetched recipe in the oneRecipe that was globaly declared
         oneRecipe = response.data.singleRecipe
-        console.log("fetched recipe:", oneRecipe)
     }).catch((error)=>{
-        console.log(error)
+        console.error(error)
     })
 }
 
 function renderSingle(){
+    // checks if oneRecipe is not empty 
     if(oneRecipe){ 
         //find the section in the html made for this area
             const singleRecipeContainer = document.querySelector('.recipe-container')
@@ -95,11 +103,11 @@ function renderSingle(){
             //append the div to the html page
             singleRecipeContainer.appendChild(recipeDiv)
         }
-        console.log("Rendering recipe:", oneRecipe)
 }
 
 
 function renderRecipes(){
+    //iterates over the recipes array
     recipes.forEach((recipe) => {
         const allRecipesContainer = document.querySelector('.allRecipes-container')
 
