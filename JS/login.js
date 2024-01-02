@@ -38,7 +38,7 @@ async function loginEvent(){
             userInfo = response.data.userProfile
             console.log('logged in user info:', userInfo)
             window.location.href =  `profile.html`
-            // ?id=${userInfo._id}
+            
             
         } else{
             const errorMessage = response.data.message || 'Login failed with no additional message'

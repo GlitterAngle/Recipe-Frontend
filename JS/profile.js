@@ -17,6 +17,14 @@
 //     // Console log the token
 //     console.log("User token:", token);
 // });
+const logoutBtn = document.querySelector('.logout')
+
+logoutBtn.addEventListener('click', function(){
+    localStorage.removeItem('token')
+
+    window.location.href = 'html/login.html'
+})
+
 
 function decodeJWT() {
     const token = localStorage.getItem('token'); // Retrieve the token from local storage

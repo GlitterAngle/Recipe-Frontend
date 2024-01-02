@@ -4,6 +4,14 @@ let recipes = []
 let oneRecipe = {}
 
 
+const logoutBtn = document.querySelector('.logout')
+
+logoutBtn.addEventListener('click', function(){
+    localStorage.removeItem('token')
+
+    window.location.href = 'html/login.html'
+})
+
 //add a listener that runs when the DOM content is fully loaded and depending on the current URL runs a particular code
 document.addEventListener('DOMContentLoaded', function(){
     //parses the current URL to check if there is a recipe ID parameter
