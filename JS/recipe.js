@@ -109,6 +109,7 @@ function renderSingle(){
             recipeDiv.setAttribute('data-id', oneRecipe._id)
     
             //fill text
+
             recipeImg.src = oneRecipe.imagePath
             recipeTitle.textContent = oneRecipe.title
             recipeUser.textContent = oneRecipe.user

@@ -4,22 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css">
-    <script defer src="../JS/profile.js"></script>
+    <script defer src="../JS/createRecipe.js"></script>
     <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <nav> 
+    <nav>
         <img src="../assets /DALL·E 2023-12-27 20.11.48 - Create a logo identical to the second example from the previous set, but replace the text with 'Heartfelt Bites'. The logo should have a simple and mi.png" width="100" height="100"/>
         <a href="allRecipes.html" class="allRecipes">All Recipes</a>
-        <a href="login.html" class="logout">Logout</a>
+        <a href="login.html">Logout</a>
     </nav>
-    <h3>Welcome!</h3>
-    <div>
-        <a href="createRecipe.html" class="create-post">Create Post</a>
-    </div>
-    <div class="user-profile">
-        <p class="passed-recipes">Your recipes</p>
-    </div>
+    <form class="new-post">
+        <input type="file" class="imageInput" accept="image/*">
+        <input type="text" class="title" placeholder="Title">
+        <textarea type="text" class="ingredients" placeholder="Ingredients"></textarea>
+        <textarea type="text" class="directions" placeholder="Directions"></textarea>
+        <textarea class="story" placeholder="Share why this is near and dear to you"></textarea>
+        <input type="submit" class="create-recipe" value="Create Post">
+    </form>
 </body>
 </html>

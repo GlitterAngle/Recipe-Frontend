@@ -1,374 +1,145 @@
-//get all recipes only show title name
-//get recipe by id show the whole recipe
-//get the user by id and their entrie recipe history
+// //idk if i will need this
+document.addEventListener('DOMContentLoaded', () => {
+    // Retrieve the token from local storage
+    const token = localStorage.getItem('token');
 
-let recipes = []
-let oneRecipe = []
-let users = []
-
-
-document.addEventListener('DOMContentLoaded', function(){
-    allRecipes()
-    .then(()=>{
-        return renderRecipes()
-    })
-})
-
-document.addEventListener('DOMContentLoaded', function(){
-    const urlParams = new URLSearchParams(window.location.search)
-    const recipeId = urlParams.get('id')
-    if(recipeId){
-        recipeByID(recipeId)
-    }
-})
-
-async function allRecipes(){
-    const response = await axios.get("https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes")
-    .then(response=>{
-        recipes = response.data.allRecipes
-    })
-    
-}
-
-// async function recipeByID(id){
-//     const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/${id}`)
-//     .then(response=>{
-//         oneRecipe = response.data.singleRecipe
-//     }).then(()=>{
-//         renderSingle()
-//     })
-// }
-
-async function recipeByID(id){
-    try {
-        const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/${id}`);
-        renderSingle(response.data.singleRecipe);
-    } catch (error) {
-        console.error('Error fetching recipe:', error);
-        // Handle errors, maybe display a message to the user
-    }
-}
-document.addEventListener('DOMContentLoaded', function(){
-    const urlParams = new URLSearchParams(window.location.search);
-    const recipeId = urlParams.get('id');
-    if (recipeId) {
-        recipeByID(recipeId);
-    }
+    // Console log the token
+    console.log("User token:", token);
 });
 
 
 
-function renderSingle(){
-    if(oneRecipe){ 
-        //find the section in the html made for this area
-            const singleRecipeContainer = document.querySelector('.recipe-container')
-    
-            //create divs where the information will life
-            const recipeDiv = document.createElement('div')
-            const recipeImg = document.createElement('img')
-            const recipeTitle = document.createElement('h2')
-            const recipeUser = document.createElement('h3')
-            const recipeCreated = document.createElement('p')
-            const recipeIngredients = document.createElement('p')
-            const recipeDirections = document.createElement('p')
-            const recipeStory = document.createElement('p')
-    
-            //give class names
-            recipeDiv.className = 'recipeDiv'
-            recipeImg.className = 'recipeImg'
-            recipeTitle.className = 'recipeTitle'
-            recipeUser.className = 'recipeUser'
-            recipeCreated.className = 'recipeCreated'
-            recipeIngredients.className = 'recipeIngredients'
-            recipeDirections.className = 'recipeDirections'
-            recipeStory.className = 'recipeStory'
-    
-            //set id incase user is logged in and wants to edit page from here 
-            recipeDiv.setAttribute('data-id', oneRecipe._id)
-    
-            //fill text
-            recipeImg.src = oneRecipe.imagePath
-            recipeTitle.textContent = oneRecipe.title
-            recipeUser.textContent = oneRecipe.user
-            recipeCreated.textContent = oneRecipe.timestamp
-            recipeIngredients.textContent = oneRecipe.ingredients
-            recipeDirections.textContent = oneRecipe.recipeDirections
-            recipeStory.textContent = oneRecipe.story
-    
-            //append to div 
-            recipeDiv.appendChild(recipeImg)
-            recipeDiv.appendChild(recipeTitle)
-            recipeDiv.appendChild(recipeUser)
-            recipeDiv.appendChild(recipeCreated)
-            recipeDiv.appendChild(recipeIngredients)
-            recipeDiv.appendChild(recipeDirections)
-            recipeDiv.appendChild(recipeStory)
-    
-            //append the div to the html page
-            singleRecipeContainer.appendChild(recipeDiv)
-        }
+// this is to get the token along with the user infor like the id and username
+function decodeJWT() {
+    const token = localStorage.getItem('token'); // Retrieve the token from local storage
+    if (!token) {
+        throw new Error('No token found in local storage');
+    }
+
+    const parts = token.split('.'); // Split the token into parts
+    if (parts.length !== 3) {
+        throw new Error('The token is invalid');
+    }
+
+    const decodedHeader = atob(parts[0]); // Decode the header
+    const decodedPayload = atob(parts[1]); // Decode the payload
+
+    return {
+        header: JSON.parse(decodedHeader),
+        payload: JSON.parse(decodedPayload)
+    };
 }
 
-function renderRecipes(){
-    recipes.forEach((recipe) => {
-        const allRecipesContainer = document.querySelector('.allRecipes-container')
 
-        //create the divs where the information will live
+//I think this was just to test if the fucntion worked
+// Use the function
+try {
+    const decoded = decodeJWT();
+    console.log(decoded);
+} catch (error) {
+    console.error('Error decoding JWT:', error.message);
+}
+
+
+
+/////how i had profile js
+
+const logoutBtn = document.querySelector('.logout')
+let recipes = {}
+
+logoutBtn.addEventListener('click', function(){
+    localStorage.removeItem('token')
+
+    window.location.href = 'html/login.html'
+})
+
+
+
+//add a listener that runs when the DOM content is fully loaded and depending on the current URL runs a particular code
+document.addEventListener('DOMContentLoaded', function(){
+    //parses the current URL to check if there is a recipe ID parameter
+    const urlParams = new URLSearchParams(window.location.search)//this works pulls an array of 1 because thats what it is
+    console.log(urlParams)
+
+    const userId = urlParams.get('id')//this works
+    console.log(userId)
+
+    //checks if the current page is allRecipes.html if soe calls allrecipes function and renderRecipes
+    if(window.location.href.includes(`/profile.html?id=${userId}`)){
+       getRecipes()
+       .then(()=>{
+        // console.log(recipes)
+        renderProfile()
+       })
+    } 
+})
+
+async function getRecipes(){
+    const urlParams = new URLSearchParams(window.location.search)
+    const token = localStorage.getItem('token')
+    const userId = urlParams.get('id')
+    console.log(userId)
+    try {
+        console.log(token)
+        const response = await axios.get(`http://localhost:3000/api/recipes/user/${userId}`, {
+            headers: { Authorization: `Bearer ${token}` }})  
+            recipes = response.data.allUserRecipes
+            
+    } catch (error) {
+        console.error("Error fetching all recipes: ", error.response.data || error.message);
+    }
+}
+
+
+function renderProfile(){//make this a foreach loop
+    //find the section with the class of profile
+    recipes.forEach((recipe)=>{
+        const profile = document.querySelector('.user-profile')
+
+        //create a div element and p element
         const recipeDiv = document.createElement('div')
         const recipeTitle = document.createElement('a')
-        //will comeback and add image somehow 
-
-        //make titles a hyperlink
-        recipeTitle.href = ""
-
-        //give class name 
-        recipeDiv.className = "recipe"
-        recipeTitle.className = "singleTitle"
-
-        //set ID 
-        recipeTitle.setAttribute('data-id', recipe._id)
+    
+        //add a class to the div and element
+        recipeDiv.className = 'profile'
+        recipeTitle.className = 'recipe-title'
         
-        
+        console.log(recipe)
         //fill text
-        recipeTitle.textContent = recipe.title
-
-        //append to div
+        recipeTitle.textContent = recipe.title 
+        
+        recipeTitle.href = `recipePage.html?id=${recipe._id}`
+    
+        //append the p element to the div element
         recipeDiv.appendChild(recipeTitle)
-
-        //append div to page
-        allRecipesContainer.appendChild(recipeDiv)
-
-        recipeTitle.addEventListener('click', function(e){
-            e.preventDefault()
-            const id = e.target.getAttribute('data-id')//grabs the id for the recipe you click on 
-            window.location.href = `html/recipePage.html?id=${id}`
-            
-        })
-
-    });
+    
+        //append the div element to the section element
+        profile.appendChild(recipeDiv)
+    })
 }
 
 
 
 
-///////
-// function renderSingle(){
-//     oneRecipe.forEach((recipe)=>{
-//         //find the section in the html made for this area
-//         const singleRecipeContainer = document.querySelector('.recipe-container')
 
-//         //create divs where the information will life
-//         const recipeDiv = document.createElement('div')
-//         const recipeImg = document.createElement('img')
-//         const recipeTitle = document.createElement('h2')
-//         const recipeUser = document.createElement('h3')
-//         const recipeCreated = document.createElement('p')
-//         const recipeIngredients = document.createElement('p')
-//         const recipeDirections = document.createElement('p')
-//         const recipeStory = document.createElement('p')
+// this is to get the token along with the user infor like the id and username
+// function decodeJWT() {
+//     const token = localStorage.getItem('token'); // Retrieve the token from local storage
+//     if (!token) {
+//         throw new Error('No token found in local storage');
+//     }
 
-//         //give them their values
-//         recipeImg.src = oneRecipe.imagePath
-//         recipeTitle.textContent = oneRecipe.title
-//         recipeUser.textContent = oneRecipe.user
-//         recipeCreated.textContent = oneRecipe.timestamps
-//         recipeIngredients.textContent = oneRecipe.ingredients
-//         recipeDirections.textContent = oneRecipe.directions
-//         recipeStory.textContent = oneRecipe.story
+//     const parts = token.split('.'); // Split the token into parts
+//     if (parts.length !== 3) {
+//         throw new Error('The token is invalid');
+//     }
 
-//         //give class names
-//         recipeDiv.className = 'recipeDiv'
-//         recipeImg.className = 'recipeImg'
-//         recipeTitle.className = 'recipeTitle'
-//         recipeUser.className = 'recipeUser'
-//         recipeCreated.className = 'recipeCreated'
-//         recipeIngredients.className = 'recipeIngredients'
-//         recipeDirections.className = 'recipeDirections'
-//         recipeStory.className = 'recipeStory'
+//     const decodedHeader = atob(parts[0]); // Decode the header
+//     const decodedPayload = atob(parts[1]); // Decode the payload
 
-//         //set id incase user is logged in and wants to edit page from here 
-//         recipeDiv.setAttribute('data-id', recipe._id)
-
-//        //
-        
-
-//     })
+//     return {
+//         header: JSON.parse(decodedHeader),
+//         payload: JSON.parse(decodedPayload)
+//     };
 // }
 
-/////removing the email required for login
-
-// <!DOCTYPE html>
-// <html lang="en">
-// <head>
-//     <meta charset="UTF-8">
-//     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//     <link href="style.css">
-//     <script defer src="/JS/longin.js"></script>
-//     <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
-//     <title>Document</title>
-// </head>
-// <body>
-//     <nav> 
-//         <img src="../assets /DALL·E 2023-12-27 20.11.48 - Create a logo identical to the second example from the previous set, but replace the text with 'Heartfelt Bites'. The logo should have a simple and mi.png" width="100" height="100"/>
-//         <a href="allRecipes.html" class="allRecipes">All Recipes</a>
-//     </nav>
-//     <div class="login">
-//         <form class="username">
-//             <text>
-//                 <input type="text" placeholder="Enter username" id="username"/>
-//                 <input type="password" placeholder="Enter password" id="password"/>
-//                 <input placeholder="Enter email" id="email"/>
-//                 <button class="account">Login</button>
-//             </text>
-//         </form>
-//     </div>
-//     <div class="new-memeber">
-//         <p>Not a member yet joing us!</p>
-//         <button class="join" type="submit">Join</button>
-//     </div>
-    
-// </body>
-// </html>
-
-
-const logingBtn = document.querySelector('.account')
-const joinBtn = document.querySelector('.join')
-
-let userInfo = {}
-
-
-
-logingBtn.addEventListener("click", async function(e){
-    e.preventDefault()
-    const id = e.target.getAttribute('data-id')
-    await loginEvent()
-    .then(()=>{
-
-    })
-})
-
-joinBtn.addEventListener("click", function(){
-    window.location.href = `signup.html`
-})
-
-async function loginEvent(){
-    try {
-        const username = document.querySelector("#username")
-        const password = document.querySelector("#password")
-        const email = document.querySelector("#email")
-
-        const usernameInput = username.value
-        const passwordInput = password.value
-        const emailInput = email.value
-
-        console.log("Attempting login with:", usernameInput, passwordInput, emailInput)
-
-        const checkForUser = await axios.post("https://heartfeltbites-3a2e21beb448.herokuapp.com/api/user/login",{username: usernameInput, password: passwordInput, email: emailInput})
-
-        console.log("Server response:", checkForUser.data)
-        console.log("check for user status", checkForUser.status)
-
-        if(checkForUser.data){
-            
-            const token = checkForUser.data
-            localStorage.setItem('token', token)
-            console.log("after the checkforuser if statement",token)
-            userInfo = checkForUser.data
-            console.log('logged in user info:', userInfo)
-            window.location.href =  `profile.html?id=${userInfo._id}`
-            
-        } else{
-            const errorMessage = checkForUser.data.message || 'Login failed with no additional message'
-            console.log('Login failed:this is the error', errorMessage)
-            console.log("Else response:", checkForUser.data)
-        }
-    } catch (error) {
-        console.error("Login error:", error)
-    }
-    
-
-}
-
-async function findUser(id){
-    const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/user/${id}`)
-    try {
-        user = response.data.userInfo
-        console.log('fetched user:', user)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-///// what i tried for authenticatioin
-
-
-async function loginEvent(){
-    try {
-        const username = document.querySelector("#username").value
-        const password = document.querySelector("#password").value
-
-        console.log("Attempting login with:", username, password)
-
-        const response = await axios.post("https://heartfeltbites-3a2e21beb448.herokuapp.com/api/user/login",{username: username, password: password})
-
-        console.log("Server response:", response.data)
-        console.log("check for user status", response.status)
-
-        if(response.status === 200){
-            
-            localStorage.setItem('token', response.data.token)
-            console.log("after the response if statement",response.data.token)
-
-            userInfo = response.data.allUsers
-            console.log('logged in user info:', userInfo)
-            window.location.href =  `profile.html?id=${userInfo._id}`
-            
-        } else{
-            const errorMessage = response.data.message || 'Login failed with no additional message'
-            console.log('Login failed:this is the error', errorMessage)
-            console.log("Else response:", response.data)
-            alert('Error:' + errorMessage)
-        }
-    } catch (error) {
-        console.error("Login error:", error)
-    }
-    
-
-}
-///
-
-async function loginEvent(){
-    try {
-        const username = document.querySelector("#username").value
-        const password = document.querySelector("#password").value
-
-        logingBtn.setAttribute('data-id', userInfo._id)
-
-        console.log("Attempting login with:", username, password)
-
-        const response = await axios.post("https://heartfeltbites-3a2e21beb448.herokuapp.com/api/user/login",{username: username, password: password})
-
-        console.log("Server response:", response.data.userProfile)
-        console.log("check for user status", response.status)
-
-        if(response.status === 200){
-            
-            localStorage.setItem('token', response.data.token)
-            console.log("after the response if statement",response.data.token, response.data)
-
-            userInfo = response.data.userProfile
-            console.log('logged in user info:', userInfo)
-            window.location.href =  `profile.html?id=${userInfo._id}`
-            
-        } else{
-            const errorMessage = response.data.message || 'Login failed with no additional message'
-            console.log('Login failed:this is the error', errorMessage)
-            console.log("Else response:", response.data)
-            alert('Error:' + errorMessage)
-        }
-    } catch (error) {
-        console.error("Login error:", error)
-    }
-    
-
-}
