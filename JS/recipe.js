@@ -120,6 +120,7 @@ async function editRecipe(e, id){
 
 function renderSingle(){
     //adding decodeJWT to get the user id from the token
+    const token = localStorage.getItem('token')
     const userId = decodeJWT().payload.userId
     // checks if oneRecipe is not empty 
     if(oneRecipe){ 
@@ -186,11 +187,16 @@ function renderSingle(){
                 })
 
                 deleteBtn.addEventListener('click', async function(e){
-                    
-                })
-            } 
-        }
+                    try {
+                        await axios.delete(`http://localhost:3000/api/recipes/${oneRecipe._id}`, {headers: {Authorization: `Bearer ${token}`}})
+                        window.history.back()
+                    } catch (error) {
+                       throw new Error(error) 
+                    }
+            })
+        } 
     }
+}
 
 function renderRecipes(){
     //iterates over the recipes array
