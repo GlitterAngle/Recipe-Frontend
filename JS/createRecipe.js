@@ -1,5 +1,13 @@
 
 const createBtn = document.querySelector('.create-recipe');
+const logoutBtn = document.querySelector('.logout')
+
+logoutBtn.addEventListener('click', function(){
+    localStorage.removeItem('token')
+
+    window.location.href = 'html/login.html'
+})
+
 
 createBtn.addEventListener('click', async function(e){
     //needs prevent default so that it does go back to the profile page not very sure why 
