@@ -35,7 +35,6 @@ async function createRecipe(){
 
 }
 
-
 // this is to get the token along with the user infor like the id and username
 function decodeJWT() {
     const token = localStorage.getItem('token'); // Retrieve the token from local storage

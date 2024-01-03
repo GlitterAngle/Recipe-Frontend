@@ -119,7 +119,43 @@ function renderProfile(){//make this a foreach loop
 }
 
 
+//if i'm going to add images
+async function createRecipe(){
+    const image = document.querySelector('.imageInput')
+    const title = document.querySelector('.title').value
+    const ingredients = document.querySelector('.ingredients').value
+    const directions = document.querySelector('.directions').value
+    const story = document.querySelector('.story').value
+    //declare the token so you can use it in the header
+    const token = localStorage.getItem('token')
+    //declare the user id that is held in the deconstructed token
+    const userId = decodeJWT().payload.userId
+   //to upload the image
+   const formData = new FormData();
+   if (image.files[0]) {
+       formData.append('image', image.files[0]);
+   }
+   //another way to add the information to the form so you don't need to add it in the response one by one
+   formData.append('title', title);
+   formData.append('ingredients', ingredients);
+   formData.append('directions', directions);
+   formData.append('story', story)
+    //try catch to do post and add all the information entered into the form
+    try {
+        const response = await axios.post(`http://localhost:3000/api/recipes/${userId}`, formData,{headers: {Authorization: `Bearer ${token}`}})
+        // .then((response)=>{
+        //     window.location.href = `profile.html?id=${userId}`
+        // })
+        if(response.status === 200){
+            window.location.href = `profile.html?id=${userId}`
+        }else{
+            console.log('error not redirecting to profile page')
+        }
+    } catch (error) {
+        console.error('Error creating recipe:', error.response.data || error.message)
+    }
 
+}
 
 
 // this is to get the token along with the user infor like the id and username
