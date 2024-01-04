@@ -1,6 +1,6 @@
 
 const createBtn = document.querySelector('.create-recipe');
-const logoutBtn = document.querySelector('.logout')
+const logoutBtn = document.querySelector('#logout')
 
 logoutBtn.addEventListener('click', function(){
     localStorage.removeItem('token')

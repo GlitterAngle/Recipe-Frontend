@@ -1,9 +1,8 @@
-const logoutBtn = document.querySelector('.logout')
+const logoutBtn = document.querySelector('#logout')
 let recipes = {}
 
 logoutBtn.addEventListener('click', function(){
     localStorage.removeItem('token')
-
     window.location.href = 'html/login.html'
 })
 
