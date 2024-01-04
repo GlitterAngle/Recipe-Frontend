@@ -189,7 +189,7 @@ function renderSingle(){
                 deleteBtn.addEventListener('click', async function(e){
                     try {
                         await axios.delete(`http://localhost:3000/api/recipes/${oneRecipe._id}`, {headers: {Authorization: `Bearer ${token}`}})
-                        window.history.back()
+                        window.href.location = 'allRecipes.html'
                     } catch (error) {
                        throw new Error(error) 
                     }

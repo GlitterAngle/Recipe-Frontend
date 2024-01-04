@@ -13,6 +13,7 @@ createBtn.addEventListener('click', async function(e){
     //needs prevent default so that it does go back to the profile page not very sure why 
     e.preventDefault()
     await createRecipe()
+    console.log('clicked')
 })
 
 async function createRecipe(){
