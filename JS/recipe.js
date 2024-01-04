@@ -4,7 +4,7 @@ let recipes = []
 let oneRecipe = {}
 
 
-const logoutBtn = document.querySelector('.logout')
+const logoutBtn = document.querySelector('#logout')
 
 logoutBtn.addEventListener('click', function(){
     localStorage.removeItem('token')
