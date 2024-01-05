@@ -62,7 +62,7 @@ async function recipeByID(id){
     const token = localStorage.getItem('token')
     try {
         // const response = await axios.get(`http://localhost:3000/api/recipes/${id}`, {headers: {Authorization: `Bearer ${token}`}}) 
-        const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes${id}`, {headers: {Authorization: `Bearer ${token}`}})
+        const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/${id}`, {headers: {Authorization: `Bearer ${token}`}})
         oneRecipe = response.data.singleRecipe
         // console.log(oneRecipe)
     } catch (error) {
@@ -115,7 +115,7 @@ async function editRecipe(e, id){
 
         try {
             // const response = await axios.put(`http://localhost:3000/api/recipes/${id}`, {imagePath: newImage, title: newTitle, ingredients: newIngredients, directions: newDirections, story: newStory}, {headers: {Authorization: `Bearer ${token}`}})
-            const response = await axios.put(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes${id}`,{imagePath: newImage, title: newTitle, ingredients: newIngredients, directions: newDirections, story: newStory}, {headers: {Authorization: `Bearer ${token}`}})
+            const response = await axios.put(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/${id}`,{imagePath: newImage, title: newTitle, ingredients: newIngredients, directions: newDirections, story: newStory}, {headers: {Authorization: `Bearer ${token}`}})
         } catch (error) {
            throw new Error(error) 
         }
