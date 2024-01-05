@@ -13,7 +13,7 @@ logoutBtn.addEventListener('click', function(){
 })
 
 //add a listener that runs when the DOM content is fully loaded and depending on the current URL runs a particular code
-window.onload = function(){
+document.addEventListener('DOMContentLoaded', function(){
     //parses the current URL to check if there is a recipe ID parameter
     const urlParams = new URLSearchParams(window.location.search)
     const recipeId = urlParams.get('id')
@@ -36,7 +36,7 @@ window.onload = function(){
         })
     }
    
-}
+})
 
 
 //makes an async GET request to API endpont to fetch all recipes
