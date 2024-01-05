@@ -1,5 +1,5 @@
-const logingBtn = document.querySelector('.account')
-const joinBtn = document.querySelector('.join')
+const logingBtn = document.querySelector('#account')
+const joinBtn = document.querySelector('#join')
 
 let userInfo = {}
 

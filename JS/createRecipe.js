@@ -1,5 +1,5 @@
 
-const createBtn = document.querySelector('.create-recipe');
+const createBtn = document.querySelector('#create-recipe');
 const logoutBtn = document.querySelector('#logout')
 
 logoutBtn.addEventListener('click', function(){
@@ -17,7 +17,7 @@ createBtn.addEventListener('click', async function(e){
 })
 
 async function createRecipe(){
-    const image = document.querySelector('.imageInput').value
+    const image = document.querySelector('#imageInput').value
     const title = document.querySelector('.title').value
     const ingredients = document.querySelector('.ingredients').value
     const directions = document.querySelector('.directions').value

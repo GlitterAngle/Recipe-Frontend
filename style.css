@@ -13,8 +13,9 @@ body{
     background-color: #4C5F41;
     opacity: 0.8;
     color: #56423D;
-    box-shadow: 0px 10px 8px 0px rgba(0, 0, 0, 0.5);
-    width: 80%;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
+    margin-top: 2%;
+    width: 60%;
     display: flex;
     justify-content: center;
 }
@@ -23,3 +24,79 @@ body{
     color: #221a18;
     font-weight: bold;
 }
+
+.allRecipes-container, .profile-container,.new-post, .recipe-container{
+    min-height: 100px;
+    width: 60%;
+    background-color: rgba(210, 180, 140, 0.8);
+    box-shadow: 0px 10px 8px 0px rgba(0, 0, 0, 0.5);
+    /* padding: 1em; */
+}
+
+.allRecipes-container a, h2, h3, h4, p{
+    color: #56423D;
+    text-decoration: none;
+}
+
+.allrecipes-intro, .profile-intro, .passed-recipes, .create-post, .recipeTitle, .recipeUser{
+    text-align: center;
+}
+
+.allRecipes-container a:hover{
+    color: #56423D;
+    text-decoration: underline;
+}
+
+.new-post{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    width: 60%;
+    background-color: rgba(210, 180, 140, 0.8);
+    box-shadow: 0px 10px 8px 0px rgba(0, 0, 0, 0.5);
+}
+
+.new-post input, .new-post textarea {
+    width: 100%; /* Adjust as needed */
+    margin-bottom: 10px; /* Space between elements */
+}
+
+.new-post .create-recipe {
+    width: auto; /* Adjust button width as needed */
+    margin: 0 auto; /* Center the button */
+}
+
+.recipe, .profile, .recipeCreated ,.recipeIngredients, .recipeDirections, .recipeStory{
+    padding: 1em;
+}
+
+.recipeImg img {
+    display: block; /* Make sure it's treated as a block-level element */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login-container {
+    margin-top: 20%;
+    /*margin-bottom: 20%; */
+    text-align: center;
+    width: 60%;
+    background-color: rgba(210, 180, 140, 0.8)
+}
+
+.btn {
+    color: #4C5F41;
+    border-color: #4C5F41; 
+    font-weight: bold;
+  }
+  
+    .btn:hover {
+        color: #4C5F41;
+        border-color: #4C5F41;
+        background-color: #d2b48c;
+    }
+  button { margin: 20px;}
+
+

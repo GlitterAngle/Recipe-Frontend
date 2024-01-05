@@ -149,6 +149,7 @@ function renderSingle(){
     
             //set id incase user is logged in and wants to edit page from here 
             recipeDiv.setAttribute('data-id', oneRecipe._id)
+            
     
             //fill text
 
@@ -157,7 +158,7 @@ function renderSingle(){
             recipeUser.textContent = oneRecipe.user.username
             recipeCreated.textContent = oneRecipe.timestamp
             recipeIngredients.textContent = oneRecipe.ingredients
-            recipeDirections.textContent = oneRecipe.recipeDirections
+            recipeDirections.textContent = oneRecipe.directions
             recipeStory.textContent = oneRecipe.story
     
             //append to div 
@@ -168,6 +169,7 @@ function renderSingle(){
             recipeDiv.appendChild(recipeIngredients)
             recipeDiv.appendChild(recipeDirections)
             recipeDiv.appendChild(recipeStory)
+            console.log(recipeDiv)
     
             //append the div to the html page
             singleRecipeContainer.appendChild(recipeDiv)
