@@ -17,10 +17,10 @@ document.addEventListener('DOMContentLoaded', function(){
     //parses the current URL to check if there is a recipe ID parameter
     const urlParams = new URLSearchParams(window.location.search)
     const recipeId = urlParams.get('id')
-    console.log(recipeId)
+    console.log(urlParams, 'urlparams')
     //checks if the current page is allRecipes.html if soe calls allrecipes function and renderRecipes
-    if(window.location.href.includes('/html/allRecipes.html')){
-        console.log('all recipes')
+    if(window.location.href.includes('/allRecipes.html')){
+        console.log('all recipes', allRecipes())
         allRecipes()
         .then(()=>{
             return renderRecipes()
