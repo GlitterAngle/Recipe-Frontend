@@ -9,7 +9,7 @@ const logoutBtn = document.querySelector('#logout')
 logoutBtn.addEventListener('click', function(){
     localStorage.removeItem('token')
 
-    window.location.href = 'html/login.html'
+    window.location.href = 'index.html'
 })
 
 //add a listener that runs when the DOM content is fully loaded and depending on the current URL runs a particular code
