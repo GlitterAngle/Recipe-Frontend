@@ -25,7 +25,7 @@ body{
     font-weight: bold;
 }
 
-.allRecipes-container, .profile-container,.new-post, .recipe-container{
+.allRecipes-container, .profile-container,.new-post, .recipe-container, .signup{
     min-height: 100px;
     width: 60%;
     background-color: rgba(210, 180, 140, 0.8);
@@ -38,7 +38,7 @@ body{
     text-decoration: none;
 }
 
-.allrecipes-intro, .profile-intro, .passed-recipes, .create-post, .recipeTitle, .recipeUser{
+.allrecipes-intro, .profile-intro, .passed-recipes, .create-post, .recipeTitle, .recipeUser, .signup{
     text-align: center;
 }
 
