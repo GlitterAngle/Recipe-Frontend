@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function(){
     //should be null if all recipes page if singl recipe page should have an id
     console.log(recipeId, 'recipeId')
     //checks if the current page is allRecipes.html if soe calls allrecipes function and renderRecipes
-    if(window.location.href.includes('html/allRecipes')){
+    if(window.location.href.includes('html/allrecipes')){
         console.log('all recipes', allRecipes())
         allRecipes()
         .then(()=>{
