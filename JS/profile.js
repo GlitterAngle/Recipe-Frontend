@@ -24,8 +24,9 @@ async function getRecipes(userId){
 
     try {
         console.log(token)
-        const response = await axios.get(`http://localhost:3000/api/recipes/user/${userId}`, {
-            headers: { Authorization: `Bearer ${token}` }})  
+        // const response = await axios.get(`http://localhost:3000/api/recipes/user/${userId}`, {headers: { Authorization: `Bearer ${token}` }})  
+        const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/user/${userId}`, {
+            headers: { Authorization: `Bearer ${token}` }})
             recipes = response.data.allUserRecipes
             
     } catch (error) {

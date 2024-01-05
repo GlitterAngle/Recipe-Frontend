@@ -26,10 +26,13 @@ async function createRecipe(){
     const token = localStorage.getItem('token')
     //declare the user id that is held in the deconstructed token
     const userId = decodeJWT().payload.userId
+
+    console.log(userId,token)
    
     //try catch to do post and add all the information entered into the form
     try {
-        const response = await axios.post(`http://localhost:3000/api/recipes/${userId}`, {imagePath: image, title: title, ingredients: ingredients, directions: directions, story: story}, {headers: {Authorization: `Bearer ${token}`}})
+        // const response = await axios.post(`http://localhost:3000/api/recipes/${userId}`, {imagePath: image, title: title, ingredients: ingredients, directions: directions, story: story}, {headers: {Authorization: `Bearer ${token}`}})
+        const response = await axios.post(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/${userId}`, {imagePath: image, title: title, ingredients: ingredients, directions: directions, story: story}, {headers: {Authorization: `Bearer ${token}`}})
         // .then((response)=>{
         //     window.location.href = `profile.html?id=${userId}`
         // })

@@ -15,7 +15,8 @@ async function newUser(){
     const newEmail = email.value
 
     try {
-        const response = await axios.post('http://localhost:3000/api/user', {username: newUsername, password: newPassword, email: newEmail})
+        // const response = await axios.post('http://localhost:3000/api/user', {username: newUsername, password: newPassword, email: newEmail})
+        const response = await axios.post('https://heartfeltbites-3a2e21beb448.herokuapp.com/api/user',{username: newUsername, password: newPassword, email: newEmail})
         console.log(response.data)
     } catch (error) {
         console.error("Signup error:", error)
