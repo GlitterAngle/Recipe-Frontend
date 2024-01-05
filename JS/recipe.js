@@ -13,13 +13,13 @@ logoutBtn.addEventListener('click', function(){
 })
 
 //add a listener that runs when the DOM content is fully loaded and depending on the current URL runs a particular code
-document.addEventListener('DOMContentLoaded', function(){
+window.onload = function(){
     //parses the current URL to check if there is a recipe ID parameter
     const urlParams = new URLSearchParams(window.location.search)
     const recipeId = urlParams.get('id')
 
     //checks if the current page is allRecipes.html if soe calls allrecipes function and renderRecipes
-    if(window.location.href.includes('/html/allrecipes.html')){
+    if(window.location.href.includes('/html/allRecipes.html')){
         console.log('all recipes')
         allRecipes()
         .then(()=>{
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function(){
         })
     }
    
-})
+}
 
 
 //makes an async GET request to API endpont to fetch all recipes
