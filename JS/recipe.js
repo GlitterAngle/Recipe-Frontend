@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function(){
     //parses the current URL to check if there is a recipe ID parameter
     const urlParams = new URLSearchParams(window.location.search)
     const recipeId = urlParams.get('id')
-
+    console.log(recipeId)
     //checks if the current page is allRecipes.html if soe calls allrecipes function and renderRecipes
     if(window.location.href.includes('/html/allRecipes.html')){
         console.log('all recipes')
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function(){
     }
 
     //checks if the current page is recipePage.html with a specific recipe id and if so calls the recipeById function and then the renderSingle 
-    if(window.location.href.includes(`/html/recipePage.html?id=${recipeId}`)){
+    if(window.location.href.includes(`/recipePage.html?id=${recipeId}`)){
         recipeByID(recipeId)
         
         .then(()=>{
