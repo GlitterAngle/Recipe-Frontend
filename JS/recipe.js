@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     //checks if the current page is allRecipes.html if soe calls allrecipes function and renderRecipes
     if(window.location.href.includes('/html/allRecipes.html')){
+        console.log('all recipes')
         allRecipes()
         .then(()=>{
             return renderRecipes()
