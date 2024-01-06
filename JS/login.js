@@ -7,9 +7,9 @@ logingBtn.addEventListener("click", async function(e){
     e.preventDefault()
     const id = e.target.getAttribute('data-id')
     await loginEvent(id)
-    .then(()=>{
+    // .then(()=>{
 
-    })
+    // })
 })
 
 joinBtn.addEventListener("click", function(){
