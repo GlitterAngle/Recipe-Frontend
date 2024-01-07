@@ -24,9 +24,8 @@ async function getRecipes(userId){
 
     try {
         console.log(token)
-        // const response = await axios.get(`http://localhost:3000/api/recipes/user/${userId}`, {headers: { Authorization: `Bearer ${token}` }})  
-        const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/user/${userId}`, {
-            headers: { Authorization: `Bearer ${token}` }})
+        const response = await axios.get(`http://localhost:3000/api/recipes/user/${userId}`, {headers: { Authorization: `Bearer ${token}` }})  
+        // const response = await axios.get(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/user/${userId}`, {headers: { Authorization: `Bearer ${token}` }})
             recipes = response.data.allUserRecipes
             
     } catch (error) {
@@ -39,7 +38,7 @@ function renderProfile(){//make this a foreach loop
     //find the section with the class of profile
     recipes.forEach((recipe)=>{
         const profile = document.querySelector('.user-profile')
-
+        const username = document.querySelector('.profile-intro')
         //create a div element and p element
         const recipeDiv = document.createElement('div')
         const recipeTitle = document.createElement('a')
@@ -54,6 +53,7 @@ function renderProfile(){//make this a foreach loop
         
         recipeTitle.href = `recipePage.html?id=${recipe._id}`
     
+        username.textContent = 'Welcome ' + recipe.user.username 
         //append the p element to the div element
         recipeDiv.appendChild(recipeTitle)
     

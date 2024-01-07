@@ -11,24 +11,29 @@
     <title>Document</title>
 </head>
 <body>
-    <nav id="nav" class="navbar navbar-expand-lg navbar-light"> 
-        <ul class="nav">
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light">
+      <div class="container-fluid">
+          <img src="../assets /heart only.png" alt="Your Image Description" style="height: 50px;"/>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <img src="../assets /Heart Felt Cropped.png" alt="Your Image Description" style="height: 50px;"/>
+              <a href="allRecipes.html" class="nav-link active" aria-current="page" href="#">All Recipes</a>
             </li>
             <li class="nav-item">
-                <a href="allRecipes.html" class="nav-link active" aria-current="page" href="#">All Recipes</a>
-              </li>
-              <li class="nav-item">
-                <a href="profile.html" class="nav-link active" aria-current="page" href="#">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a href="createRecipe.html" class="nav-link active" aria-current="page" href="#">Create Post</a>
+              <a href="profile.html" class="nav-link active" aria-current="page" href="#">Profile</a>
             </li>
             <li class="nav-item">
-              <a href="../index.html" id="logout" class="nav-link active" aria-current="page" href="#">Logout</a>
-            </li>
+              <a href="createRecipe.html" class="nav-link active" aria-current="page" href="#">Create Post</a>
+          </li>
+          <li class="nav-item">
+            <a href="../index.html" id="logout" class="nav-link active" aria-current="page" href="#">Logout</a>
+          </li>
           </ul>
+        </div>
+      </div>
     </nav>
     <div class="recipe-container">
     </div>
