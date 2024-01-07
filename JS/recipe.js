@@ -181,11 +181,11 @@ function renderSingle(){
 
             if(userId === oneRecipe.user._id){
                 const editBtn = document.createElement('button')
-                editBtn.className = 'editBtn'
+                editBtn.className = 'button btn btn-outline"'
                 editBtn.textContent = 'Edit'
                 recipeDiv.appendChild(editBtn)
                 const deleteBtn = document.createElement('button')
-                deleteBtn.className = 'deleteBtn'
+                deleteBtn.className = 'button btn btn-outline"'
                 deleteBtn.textContent = 'Delete'
                 recipeDiv.appendChild(deleteBtn)
                 
