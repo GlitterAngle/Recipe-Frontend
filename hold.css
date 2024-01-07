@@ -7,6 +7,8 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-height: 100vh;
+    justify-content: center;
 }
 
 #nav{
@@ -14,7 +16,6 @@ body{
     opacity: 0.8;
     color: #56423D;
     box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.5);
-    margin-top: 2%;
     width: 60%;
     display: flex;
     justify-content: center;
@@ -33,9 +34,13 @@ body{
     /* padding: 1em; */
 }
 
- .allRecipes-container a, h2, h3, h4, p{
+.allRecipes-container a, h2, h3, h4, p{
     color: #56423D;
     text-decoration: none;
+}
+
+.allrecipes-intro, .profile-intro, .passed-recipes, .create-post, .recipeTitle, .recipeUser, .signup{
+    text-align: center;
 }
 
 .allRecipes-container a:hover{
@@ -43,21 +48,7 @@ body{
     text-decoration: underline;
 }
 
-.allrecipes-intro, .profile-intro, .passed-recipes, .create-post, .recipeTitle, .recipeUser, .signup{
-    text-align: center;
-}
-
-.profile a{
-    color: #56423D;
-    text-decoration: none;
-}
-
-.profile a:hover{
-    color: #56423D;
-    text-decoration: underline;
-}
-
-.new-post{
+.new-post, .login-container{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,17 +64,16 @@ body{
     margin-bottom: 10px; /* Space between elements */
 }
 
-.new-post .create-recipe {
-    width: auto; /* Adjust button width as needed */
-    margin: 0 auto; /* Center the button */
-}
-
 .username input, .username textarea{
-    width: 80%; /* Adjust as needed */
-    margin-bottom: 10px; /* Space between elements */
-
+    width: 50%;
+    margin-bottom: 10px;
 }
 
+.login-container input, .login-container textarea{
+    width: 50%;
+    margin-bottom: 10px;
+    
+}
 .recipe, .profile, .recipeCreated ,.recipeIngredients, .recipeDirections, .recipeStory{
     padding: 1em;
 }
@@ -94,21 +84,18 @@ body{
     margin-right: auto;
 }
 
-.login-container {
+/* .login-container {
     margin-top: 20%;
-    /*margin-bottom: 20%; */
+    margin-bottom: 20%;
     text-align: center;
     width: 60%;
     background-color: rgba(210, 180, 140, 0.8)
-}
+} */
 
-
-
-.btn , .btn input , .btn textarea{
+.btn {
     color: #4C5F41;
     border-color: #4C5F41; 
     font-weight: bold;
-    width: 50%;
   }
   
     .btn:hover {
