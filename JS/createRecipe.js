@@ -17,7 +17,7 @@ createBtn.addEventListener('click', async function(e){
 })
 
 async function createRecipe(){
-    const image = document.querySelector('#imageInput').value
+    const image = document.querySelector('#inputGroupFile').value
     const title = document.querySelector('.title').value
     const ingredients = document.querySelector('.ingredients').value
     const directions = document.querySelector('.directions').value
