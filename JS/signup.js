@@ -1,4 +1,4 @@
-const submitBtn = document.querySelector(".submit")
+const submitBtn = document.querySelector(".create")
 
 submitBtn.addEventListener('click', async function(e){
     // e.preventDefault()
