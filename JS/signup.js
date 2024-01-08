@@ -1,7 +1,7 @@
 const submitBtn = document.querySelector("#create")
 
 submitBtn.addEventListener('click', async function(e){
-    // e.preventDefault()
+    e.preventDefault()
     //to make this redirect to the profile page put the newUserResponse in a variable 
     const newUserResponse = await newUser()
 
