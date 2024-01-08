@@ -8,7 +8,7 @@ Here is where I will focus on my frontend work for the Recipe website
 HTML CSS JS 
 
 ##Attributions
-TBA
+Chat GPT, past homeworks, youtube
 
 ##Stretch goals
 -Favorites page
