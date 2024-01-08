@@ -31,11 +31,11 @@ async function createRecipe(){
    
     //try catch to do post and add all the information entered into the form
     try {
-        const response = await axios.post(`http://localhost:3000/api/recipes/${userId}`, {imagePath: image, title: title, ingredients: ingredients, directions: directions, story: story}, {headers: {Authorization: `Bearer ${token}`}})
-        // const response = await axios.post(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/${userId}`, {imagePath: image, title: title, ingredients: ingredients, directions: directions, story: story}, {headers: {Authorization: `Bearer ${token}`}})
-        // .then((response)=>{
-        //     window.location.href = `profile.html?id=${userId}`
-        // })
+        // const response = await axios.post(`http://localhost:3000/api/recipes/${userId}`, {imagePath: image, title: title, ingredients: ingredients, directions: directions, story: story}, {headers: {Authorization: `Bearer ${token}`}})
+        const response = await axios.post(`https://heartfeltbites-3a2e21beb448.herokuapp.com/api/recipes/${userId}`, {imagePath: image, title: title, ingredients: ingredients, directions: directions, story: story}, {headers: {Authorization: `Bearer ${token}`}})
+        .then((response)=>{
+            window.location.href = `profile.html?id=${userId}`
+        })
         if(response.status === 200){
             window.location.href = `profile.html?id=${userId}`
         }else{

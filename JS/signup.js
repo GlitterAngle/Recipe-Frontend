@@ -21,8 +21,8 @@ async function newUser(){
     const newEmail = email.value
 
     try {
-        const response = await axios.post('http://localhost:3000/api/user', {username: newUsername, password: newPassword, email: newEmail})
-        // const response = await axios.post('https://heartfeltbites-3a2e21beb448.herokuapp.com/api/user',{username: newUsername, password: newPassword, email: newEmail})
+        // const response = await axios.post('http://localhost:3000/api/user', {username: newUsername, password: newPassword, email: newEmail})
+        const response = await axios.post('https://heartfeltbites-3a2e21beb448.herokuapp.com/api/user',{username: newUsername, password: newPassword, email: newEmail})
         
         return {username: newUsername, password: newPassword, id: response.data.newUser._id}
     } catch (error) {
@@ -39,8 +39,8 @@ async function loginEvent(){
 
         console.log("Attempting login with:", username, password)
 
-        const response = await axios.post("http://localhost:3000/api/user/login",{username: username, password: password})
-        // const response = await axios.post("https://heartfeltbites-3a2e21beb448.herokuapp.com/api/user/login",{username: username, password: password})
+        // const response = await axios.post("http://localhost:3000/api/user/login",{username: username, password: password})
+        const response = await axios.post("https://heartfeltbites-3a2e21beb448.herokuapp.com/api/user/login",{username: username, password: password})
 
         console.log("Server response:", response.data)
         console.log("check for user status", response.status)
