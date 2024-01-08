@@ -5,7 +5,7 @@ Here is where I will focus on my frontend work for the Recipe website
 ![Recipe Wireframe (1)](https://github.com/GlitterAngle/Recipe-Frontend/assets/138747127/b4f933e0-6118-4dda-abb3-4dc160caa461)
 
 ##Technologies Used
-HTML CSS JS 
+HTML CSS JS Bootstrap
 
 ##Attributions
 Chat GPT, past homeworks, youtube
